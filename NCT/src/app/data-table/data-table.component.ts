@@ -19,21 +19,26 @@ export class DataTableComponent {
     addVillain(villain:Villain): void {
 
       const newVillain:Villain = {
-        id:  this.villains.length + 1,
+        id: this.villains.length + 1,
         name: villain.name,
         location: villain.location,
         reportee: villain.reportee,
         time: villain.time,
-        status: villain.status,
+        status: 'OPEN',
         info: villain.info
       };
 
       this.villainService.addVillain(newVillain);
+
+      console.log("Added villain: " + newVillain.name);
+      console.log(newVillain);
+      
       this.showForm = false;
     }
 
     toggleForm(): void {
       this.showForm = !this.showForm;
     }
+    
 
 }

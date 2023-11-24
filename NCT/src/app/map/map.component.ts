@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
+import { MapService } from './map.service';
+import { AddLocationService } from '../add-location/add-location.service';
+import { Map, LatLng, tileLayer } from 'leaflet';
 import * as L from 'leaflet';
 
 @Component({
@@ -6,30 +9,37 @@ import * as L from 'leaflet';
   templateUrl: './map.component.html',
   styleUrl: './map.component.css'
 })
-export class MapComponent implements OnInit{
+export class MapComponent implements AfterViewInit {
   
-    private map!: L.Map;
+    private map!: Map;
 
-    constructor() {
-    }
+    constructor(private locationService: AddLocationService) { }
 
-    ngOnInit(): void {
-      this.showMap();
-      this.map.on('click', this.addMarker.bind(this));
-    }
+    ngAfterViewInit(): void {
 
-    showMap(): void {
-      this.map = L.map('mapid').setView([49.27, -123], 11);
+      this.map = new Map('mapid').setView([49.27, -123], 11);
+      let marker: L.Marker;
 
-      const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      const tiles = tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       }).addTo(this.map);
+
+
+      this.map.on('click', (e) => {
+
+        if (marker) {
+          this.map.removeLayer(marker); // Remove existing marker
+        }
+
+        const latlng: LatLng = e.latlng;
+        marker = L.marker(latlng).addTo(this.map);
+
+        const selectedLocation = `Custom Location (${latlng.lat.toFixed(4)}, ${latlng.lng.toFixed(4)})`;
+        this.locationService.addLocation(selectedLocation);
+        
+      });
+
     }
 
-    addMarker(e: L.LeafletMouseEvent): void {
-      L.marker([e.latlng.lat, e.latlng.lng]).addTo(this.map);
-    }
-
-    
 }
