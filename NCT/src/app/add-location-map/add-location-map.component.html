@@ -1,0 +1,6 @@
+
+<div id="mapid-2"></div>
+<form [formGroup]="locationForm" (ngSubmit)="onSubmit()">
+    <input type="text" id="locationname" placeholder="Location Name" required formControlName="name">
+    <button type="submit" [disabled]="locationForm.invalid">Submit</button>
+</form>

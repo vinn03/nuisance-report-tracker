@@ -7,9 +7,9 @@ import { AppComponent } from './app.component';
 import { DataTableComponent } from './data-table/data-table.component';
 import { CreateReportComponent } from './create-report/create-report.component';
 import { MapComponent } from './map/map.component';
-import { MapService } from './map/map.service';
-import { VillainService } from './villain.service';
-import { AddLocationComponent } from './add-location/add-location.component';
+import { MapService } from './services/map.service';
+import { VillainService } from './services/villain.service';
+import { AddLocationMapComponent } from './add-location-map/add-location-map.component';
 import { MoreInfoComponent } from './more-info/more-info.component';
 
 
@@ -19,7 +19,7 @@ import { MoreInfoComponent } from './more-info/more-info.component';
     DataTableComponent,
     CreateReportComponent,
     MapComponent,
-    AddLocationComponent
+    AddLocationMapComponent
   ],
   imports: [
     BrowserModule,

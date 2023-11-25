@@ -7,8 +7,13 @@ TO-DO:
     - User should be able to create and save a new location via fetched latlong coordinates from mouse-event
 
 - Newly added villains should be shown on the maps via a Marker
-- Implement Routing
 - Implement More-Info
 - Implement Delete
 - Implement StorageServer and its dependencies
 - Style page and make it look nice (lol)
+
+
+location adding onsubmit:
+- location inteface
+    - key string
+    - data location (import from location)

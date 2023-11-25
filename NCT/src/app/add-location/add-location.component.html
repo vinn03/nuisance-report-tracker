@@ -1,9 +1,0 @@
-
-
-<div>
-    <label for="locationDropdown">Select or Add Location: </label>
-    <select id="locationDropdown" [(ngModel)]="newLocation">
-      <option *ngFor="let location of locations" [value]="location">{{ location }}</option>
-    </select>
-    <button (click)="addLocation()">Add Location</button>
-</div>

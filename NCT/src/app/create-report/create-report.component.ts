@@ -20,6 +20,7 @@ export class CreateReportComponent {
     this.villainForm = this.fb.group({
       name: ['', Validators.required],
       reportee: ['', Validators.required],
+      location: ['', Validators.required],
       time: ['', Validators.required],
       info: ['', Validators.required]
     });

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Map, LatLng, Marker } from 'leaflet'; // or whatever library you are using
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -7,6 +8,8 @@ import { Map, LatLng, Marker } from 'leaflet'; // or whatever library you are us
 export class MapService {
   private map!: Map;
   private marker: Marker | undefined;
+
+  private markerCoordinatesSubject = new BehaviorSubject<string | null>(null);
 
   setMap(map: Map) {
     this.map = map;
@@ -23,11 +26,16 @@ export class MapService {
     }
   }
 
-  getMarkerCoordinates(): LatLng | undefined {
-    if (this.marker) {
-      return this.marker.getLatLng();
-    }
-    return undefined;
+  get markerCoordinates$() {
+    return this.markerCoordinatesSubject.asObservable();
+  }
+
+  setMarkerCoordinates(coordinates: string) {
+    this.markerCoordinatesSubject.next(coordinates);
+  }
+
+  getMarkerCoordinates(): string | null {
+    return this.markerCoordinatesSubject.getValue();
   }
 
   removeMarker(): void {
