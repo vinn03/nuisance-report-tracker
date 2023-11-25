@@ -2,6 +2,7 @@ import { Component, AfterViewInit, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { MapService } from '../services/map.service';
 import { LocationsService } from '../services/locations.service';
+import { VillainLocation } from '../location.model';
 import { Map, LatLng, tileLayer } from 'leaflet';
 import * as L from 'leaflet';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -57,17 +58,34 @@ export class AddLocationMapComponent implements AfterViewInit {
 
     onSubmit(): void {
       const coordinates = this.mapService.getMarkerCoordinates();
+
       if (this.locationForm.valid && coordinates) {
+
         const name = this.locationForm.get('name')!.value;
         this.locationAdded.emit(this.locationForm.value);
-        this.locationsService.addLocation(coordinates, name);
+
+        const newLocation: VillainLocation = {
+          name: name,
+          coordinates: coordinates
+        };
+
+        this.locationsService.addLocation(newLocation);
         console.log("Added location: " + name + " at " + coordinates);
-        console.log("Current Locations List: " + this.locationsService.getLocations());
+
+        const locations = this.locationsService.getLocations();
+
+        // debugging locations
+        console.log("Locations in list: ")
+        locations.forEach((location) => {
+          console.log("Location: ", location);
+        });
+
         this.locationForm.reset();
         this.router.navigate(['/map']);
-      }
+      } 
+      
       else {
-        alert("Please select a location on the map.")
+        alert("Please select a location on the map.");
       }
     }
 }

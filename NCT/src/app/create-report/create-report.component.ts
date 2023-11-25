@@ -1,5 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LocationsService } from '../services/locations.service';
+import { VillainLocation } from '../location.model';
 
 @Component({
   selector: 'app-create-report',
@@ -14,8 +16,10 @@ export class CreateReportComponent {
 
   villainForm: FormGroup;
   showForm:boolean = false;
+  locationNames: string[] = [];
   
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private locationsService: LocationsService) {
 
     this.villainForm = this.fb.group({
       name: ['', Validators.required],
@@ -27,7 +31,6 @@ export class CreateReportComponent {
 
   }
 
-
   onSubmit(): void {
     if (this.villainForm.valid) {
       this.villainAdded.emit(this.villainForm.value);
@@ -35,12 +38,24 @@ export class CreateReportComponent {
     }
   }
 
-  toggleForm(): void {
-    this.showForm = !this.showForm;
-  }
-
   closeForm(): void {
     this.formClosed.emit();
+  }
+
+  updateOptions(): void {
+    // Assuming you have a LocationsService injected and available
+    const updatedLocations = this.locationsService.getLocations();
+
+    if (updatedLocations.length > 0) {
+
+      // Clear the list of location names
+      this.locationNames = [];
+
+      // Append each location name to the options
+      for (const location of updatedLocations as VillainLocation[]) {
+        this.locationNames.push(location.name);
+      }
+    }
   }
 }
 

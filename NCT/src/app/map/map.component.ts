@@ -24,19 +24,5 @@ export class MapComponent implements AfterViewInit {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       }).addTo(this.map);
 
-
-      this.map.on('click', (e) => {
-
-        if (this.marker) {
-          this.map.removeLayer(this.marker); // Remove existing marker
-        }
-
-        const latlng: LatLng = e.latlng;
-        this.marker = L.marker(latlng).addTo(this.map);
-
-        const selectedLocation = `(${latlng.lat.toFixed(4)}, ${latlng.lng.toFixed(4)})`;
-        this.mapService.setMarkerCoordinates(selectedLocation);
-      });
-
     }
 }

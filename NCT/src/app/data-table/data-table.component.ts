@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { VillainService } from '../services/villain.service';
 import { Villain } from '../villain.model';
+import { MapService } from '../services/map.service';
+
+// TODO: implement marker appearence on main map upon villian creation
 
 @Component({
   selector: 'app-data-table',

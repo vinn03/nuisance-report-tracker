@@ -1,5 +1,4 @@
 
-<p>create-report works!</p>
 
 <h2>Add Person:</h2>
 <form [formGroup]="villainForm" (ngSubmit)="onSubmit()">
@@ -19,10 +18,10 @@
     <br>
 
     <label> Location: </label>
-        <select formControlName="location" required>
-            <!-- <option *ngFor="let location of locations" [value]="location">{{location}}</option> -->
-            <option value="1>">1</option>
+        <select formControlName="location" required> 
+            <option *ngFor="let location of locationNames" [value]="location">{{location}}</option>
         </select>
+        <button type="button" (click)="updateOptions()">Fetch Location List (required)</button>
 
     <br>
 

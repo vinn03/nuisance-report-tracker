@@ -1,20 +1,17 @@
 
 import { Injectable } from '@angular/core';
+import { VillainLocation } from '../location.model';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class LocationsService {
-  private locations: object[] = [];
+  private locations: VillainLocation[] = [];
 
   constructor() { }
 
-  addLocation(coordinates: string, name: string): void {
-    const location = {
-        coordinates: coordinates,
-        name: name
-    }
+  addLocation(location: VillainLocation): void {
     this.locations.push(location);
   }
 
