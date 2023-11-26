@@ -2,8 +2,6 @@
  
 TO-DO:
 
-
-- Newly added villains should be shown on the maps via a Marker
 - Implement More-Info
 - Implement Delete
 - Implement StorageServer and its dependencies
