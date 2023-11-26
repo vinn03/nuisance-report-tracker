@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { VillainService } from '../services/villain.service';
-import { Villain } from '../villain.model';
-import { MapService } from '../services/map.service';
+import { VillainService } from '../../services/villain.service';
+import { Villain } from '../../models/villain.model';
+import { MapService } from '../../services/map.service';
 
 // TODO: implement marker appearence on main map upon villian creation
 

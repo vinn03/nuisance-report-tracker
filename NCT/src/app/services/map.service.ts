@@ -7,7 +7,6 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class MapService {
   private map!: Map;
-  private marker: Marker | undefined;
 
   private markerCoordinatesSubject = new BehaviorSubject<string | null>(null);
 
@@ -15,14 +14,14 @@ export class MapService {
     this.map = map;
   }
 
-  getMap(): Map | undefined {
+  getMap(): Map {
     return this.map;
   }
 
-  placeMarker(latlng: LatLng): void {
+  placeMarker(marker: Marker, locationName: string, count: number): void {
     if (this.map) {
-        this.marker = new Marker(latlng);
-        this.marker.addTo(this.map);
+      marker.addTo(this.map);
+      marker.bindPopup(`<b>${locationName}</b><br>${count} nuisance(s) reported`);
     }
   }
 
@@ -38,10 +37,9 @@ export class MapService {
     return this.markerCoordinatesSubject.getValue();
   }
 
-  removeMarker(): void {
-    if (this.map && this.marker) {
-      this.map.removeLayer(this.marker);
-      this.marker = undefined;
+  removeMarker(marker: Marker): void {
+    if (this.map) {
+      this.map.removeLayer(marker);
     }
   }
 }

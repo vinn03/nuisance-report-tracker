@@ -4,13 +4,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { RoutingModule } from './routing.module';
 import { AppComponent } from './app.component';
-import { DataTableComponent } from './data-table/data-table.component';
-import { CreateReportComponent } from './create-report/create-report.component';
-import { MapComponent } from './map/map.component';
+import { DataTableComponent } from './components/data-table/data-table.component';
+import { CreateReportComponent } from './components/create-report/create-report.component';
+import { MapComponent } from './components/map/map.component';
 import { MapService } from './services/map.service';
 import { VillainService } from './services/villain.service';
-import { AddLocationMapComponent } from './add-location-map/add-location-map.component';
-import { MoreInfoComponent } from './more-info/more-info.component';
+import { AddLocationMapComponent } from './components/add-location-map/add-location-map.component';
+import { MoreInfoComponent } from './components/more-info/more-info.component';
 
 
 @NgModule({

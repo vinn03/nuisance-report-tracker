@@ -1,8 +1,8 @@
 import { Component, AfterViewInit, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { MapService } from '../services/map.service';
-import { LocationsService } from '../services/locations.service';
-import { VillainLocation } from '../location.model';
+import { MapService } from '../../services/map.service';
+import { LocationsService } from '../../services/locations.service';
+import { VillainLocation } from '../../models/location.model';
 import { Map, LatLng, tileLayer } from 'leaflet';
 import * as L from 'leaflet';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -57,11 +57,18 @@ export class AddLocationMapComponent implements AfterViewInit {
     }
 
     onSubmit(): void {
-      const coordinates = this.mapService.getMarkerCoordinates();
+      const coordinates:string = this.mapService.getMarkerCoordinates()!.replace(/[()]/g, '');
 
       if (this.locationForm.valid && coordinates) {
 
-        const name = this.locationForm.get('name')!.value;
+        const name: string = this.locationForm.get('name')!.value.trim();
+        const isNameExists:boolean = this.locationsService.getLocations().some(location => location.name === name);
+
+        if (isNameExists) {
+          alert("Location name already exists. Please enter a different name.");
+          return;
+        }
+
         this.locationAdded.emit(this.locationForm.value);
 
         const newLocation: VillainLocation = {

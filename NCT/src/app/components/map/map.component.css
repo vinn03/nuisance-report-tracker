@@ -1,7 +1,4 @@
-html, body {
-    height: 100%;
-    margin: auto;
-}
+
 .leaflet-container {
     height: 400px;
     width: 600px;
