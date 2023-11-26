@@ -58,12 +58,11 @@ export class CreateReportComponent {
 
     if (existingMarker) { // update report count of existing marker
     
-      this.markersService.addCount(locationName);
       const markerObject: MarkerInfo = markers.find((marker) => marker.markerName === locationName)!;
       const marker: Marker = markerObject.marker;
+      this.markersService.addMarkerToService(marker, locationName);
       this.mapService.removeMarker(marker);
       this.mapService.placeMarker(marker, locationName, markerObject.markerCount);
-      
     } 
 
     else { // add new marker to map and markers service
@@ -71,7 +70,7 @@ export class CreateReportComponent {
       const coordinates: string[] = location.coordinates.split(' ');
       const latLng: LatLng = new L.LatLng(parseFloat(coordinates[0]), parseFloat(coordinates[1]));
       const marker = new Marker(latLng);
-      this.markersService.addMarker(marker, locationName);
+      this.markersService.addMarkerToService(marker, locationName);
 
       const markerCount: number = this.markersService.getCount(locationName);
       this.mapService.placeMarker(marker, locationName, markerCount);

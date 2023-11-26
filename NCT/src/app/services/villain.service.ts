@@ -6,6 +6,7 @@ import { Villain } from '../models/villain.model';
 })
 export class VillainService {
   private villains: Villain[] = [];
+  private selectedVillain: Villain | null = null;
 
   getVillains(): Villain[] {
     return this.villains;
@@ -13,5 +14,13 @@ export class VillainService {
 
   addVillain(villain: Villain): void {
     this.villains.push(villain);
+  }
+
+  setSelection(villain: Villain): void {
+    this.selectedVillain = villain;
+  }
+
+  getSelection(): Villain {
+    return this.selectedVillain!;
   }
 }

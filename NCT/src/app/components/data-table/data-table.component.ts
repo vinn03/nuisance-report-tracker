@@ -33,15 +33,18 @@ export class DataTableComponent {
 
       this.villainService.addVillain(newVillain);
 
-      console.log("Added villain: " + newVillain.name);
+      console.log("Added Baddie: " + newVillain.name);
       console.log(newVillain);
       
       this.showForm = false;
     }
 
+    moreInfo(villain:Villain): void {
+      this.villainService.setSelection(villain);
+      console.log("Selected Baddie: " + villain.name);
+    }
+
     toggleForm(): void {
       this.showForm = !this.showForm;
     }
-    
-
 }

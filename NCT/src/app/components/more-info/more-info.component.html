@@ -1,1 +1,30 @@
-<p>more-info works!</p>
+<div *ngIf="selectedVillain">
+    <table>
+        <tr>
+            <th>Baddie's Name:</th>
+            <td>{{selectedVillain.name}}</td>
+        </tr>
+        <tr>
+            <th>Location:</th>
+            <td>{{selectedVillain.location}}</td>
+        </tr>
+        <tr>
+            <th>Reported by:</th>
+            <td>{{selectedVillain.reportee}}</td>
+        </tr>
+        <tr>
+            <th>Time Reported:</th>
+            <td>{{selectedVillain.time}}</td>
+        </tr>
+        <tr>
+            <th>Status:</th>
+            <td>{{selectedVillain.status}}</td>
+            <button click="changeStatus()">CHANGE</button>
+        </tr>
+        <tr>
+            <th>Extra Info:</th>
+            <td>{{selectedVillain.info}}</td>
+        </tr>
+    </table>
+</div>
+<button routerLink="/map">BACK</button>

@@ -19,7 +19,8 @@ import { MoreInfoComponent } from './components/more-info/more-info.component';
     DataTableComponent,
     CreateReportComponent,
     MapComponent,
-    AddLocationMapComponent
+    AddLocationMapComponent,
+    MoreInfoComponent
   ],
   imports: [
     BrowserModule,
