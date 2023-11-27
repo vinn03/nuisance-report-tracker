@@ -2,42 +2,66 @@
 
 <h2>Add Person:</h2>
 <form [formGroup]="villainForm" (ngSubmit)="onSubmit()">
-
-    <label>
-        Name:
-        <input type="text" formControlName="name" required />
-    </label>
-
-    <br>
-
-    <label>
-        Reportee:
-        <input type="text" formControlName="reportee" required />
-    </label>
-
-    <br>
-
-    <label> Location: </label>
-        <select formControlName="location" required> 
-            <option *ngFor="let location of locationNames" [value]="location">{{location}}</option>
-        </select>
-
-    <br>
-
-    <label>
-        Time:
-        <input type="text" formControlName="time" required placeholder="YYYY-MM-DD (HH:MM)" />
-    </label>
-
-    <br>
-
-    <label>
-        Info:
-        <input type="text" formControlName="info" required />
-    </label>
-
-    <br>
-    <button type="submit" [disabled]="villainForm.invalid">Add Villain</button>
-    <button type="button" (click)="closeForm()">Cancel</button>
+    <div>
+        <table>
+            <tr>
+                <td>
+                    <label>
+                        Name:
+                        
+                    </label>
+                </td>
+                <td>
+                    <input type="text" formControlName="name" required />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        Reportee:
+                        
+                    </label>
+                </td>
+                <td>
+                    <input type="text" formControlName="reportee" required />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        Location:
+                    </label>
+                </td>
+                <td>
+                    <select formControlName="location" required> 
+                        <option *ngFor="let location of locationNames" [value]="location">{{location}}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        Info:
+                    </label>
+                </td>
+                <td>
+                    <input type="text" formControlName="info" required />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        Optional Image (URL):
+                    </label>
+                </td>
+                <td>
+                    <input type="text" formControlName="image"/>
+                </td>
+            </tr>
+        </table>
+        <div>
+            <button id="submit" type="submit" [disabled]="villainForm.invalid">Add Villain</button>
+        </div>
+    </div>
 
 </form>

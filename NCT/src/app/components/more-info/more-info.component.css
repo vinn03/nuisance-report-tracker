@@ -1,0 +1,23 @@
+td, th {
+    padding-bottom: 10px;
+    padding-right: 20px;
+}
+
+button {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border: 1px solid dodgerblue;
+    color: dodgerblue;
+    background-color: white;
+    border-radius: 8px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#change {
+    padding: 2px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-left: 5px;
+}

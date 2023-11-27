@@ -44,6 +44,18 @@ export class VillainService {
     ).subscribe();
   }
 
+  deleteVillain(villain: Villain): void {
+    this.villains = this.villains.filter(v => v !== villain);
+    this.storageService.saveVillainsToStorage(this.villains).pipe(
+      tap(() => console.log("Saved villains to storage")),
+      catchError((error) => {
+        console.log("Error saving villains to storage: ", error);
+        return of(null);
+      })
+    ).subscribe();
+    console.log("Deleted Baddie: " + villain.name);
+  }
+
   setSelection(villain: Villain): void {
     this.selectedVillain = villain;
   }

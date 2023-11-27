@@ -5,5 +5,5 @@
 
 <form [formGroup]="locationForm" (ngSubmit)="onSubmit()">
     <input type="text" id="locationname" placeholder="Location Name" required formControlName="name">
-    <button type="submit" [disabled]="locationForm.invalid">Submit</button>
+    <button id="submit" type="submit" [disabled]="locationForm.invalid">Submit</button>
 </form>

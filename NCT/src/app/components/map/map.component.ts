@@ -1,8 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { MapService } from '../../services/map.service';
 import { LocationsService } from '../../services/locations.service';
-import { Map, LatLng, tileLayer, Marker } from 'leaflet';
-import * as L from 'leaflet';
+import { Map, tileLayer } from 'leaflet';
 
 @Component({
   selector: 'app-map',
@@ -17,7 +16,9 @@ export class MapComponent implements AfterViewInit {
 
     ngAfterViewInit(): void {
       this.initMap();
-      this.loadMarkers
+      setTimeout(() => {
+        this.reloadMarkers();
+      }, 500);
     }
 
     private initMap(): void {
@@ -31,12 +32,6 @@ export class MapComponent implements AfterViewInit {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       }).addTo(this.map);
       
-    }
-
-    private loadMarkers(): void {
-      this.locationsService.getLocationsObservable().subscribe(locations => {
-        this.mapService.initMarkers();
-      });
     }
 
     reloadMarkers(): void {

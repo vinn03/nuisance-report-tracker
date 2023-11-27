@@ -1,3 +1,62 @@
 th, td {
-    padding-right: 50px;
+    padding-right: 40px;
+}
+
+th {
+    /* padding-bottom: 10px; */
+    border-top: 1px;
+    border-left: 1px;
+    border-right: 1px;
+    border-width: 1px;
+    border-color: black;
+}
+
+h2 {
+    margin-top: 50px;
+    margin-bottom: -20px;
+}
+.body-cell{
+    padding-top: 10px;
+}
+
+#create {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-width: 0px;
+    background-color: #3399ff;
+    color: white;
+}
+
+#indicator {
+    margin-top: 50px;
+    font-weight:600;
+    font-style:italic;
+}
+
+button {
+    border: 1px solid dodgerblue;
+    color: dodgerblue;
+    background-color: white;
+    border-radius: 8px;
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    white-space: nowrap;
+}
+
+#delete {
+    color: red;
+    border-color: red;
+    border-radius: 8px;
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.sortable {
+    cursor: pointer;
+}
+
+.sortable:hover {
+    background-color: #cccccc;
 }

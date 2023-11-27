@@ -1,7 +1,27 @@
 
 .leaflet-container {
     height: 400px;
-    width: 600px;
+    width: 100%;
     max-width: 100%;
     max-height: 100%;
+}
+
+#map-button {
+    border: 1px solid dodgerblue;
+    color: dodgerblue;
+    background-color: white;
+    border-radius: 8px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 5px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+  
+#reload {
+    margin-left: auto;
 }

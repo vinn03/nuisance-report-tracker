@@ -3,7 +3,6 @@ import { VillainLocation } from '../models/location.model';
 import { StorageService } from './storage.service';
 import { tap, catchError } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
-import { Villain } from '../models/villain.model';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +46,28 @@ export class LocationsService {
 
   getLocationsObservable(): Observable<VillainLocation[]> {
     return of(this.locations);
+  }
+
+  getLocationCount(locationName: string): number | null {
+    const index:number = this.locations.findIndex((loc) => loc.name === locationName);
+    if (index !== -1) {
+      return this.locations[index].count;
+    }
+    return null;
+  }
+
+  decreaseCount(locationName: string): void {
+    const index = this.locations.findIndex((loc) => loc.name === locationName);
+    if (index !== -1) {
+      this.locations[index].count--;
+    }
+    this.storageService.saveLocationsToStorage(this.locations).pipe(
+      tap(() => console.log("Saved locations to storage")),
+      catchError((error) => {
+        console.log("Error saving locations to storage: ", error);
+        return of(null);
+      })
+    ).subscribe();
   }
 
   updateLocation(location: VillainLocation): void {

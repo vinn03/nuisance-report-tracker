@@ -1,0 +1,33 @@
+td {
+    padding-bottom: 10px;
+    padding-right: 10px;
+}
+
+h2 {
+    margin-top: 20px;
+}
+
+button {
+    margin-top: 10px;
+    border: 1px solid dodgerblue;
+    color: dodgerblue;
+    background-color: white;
+    border-radius: 8px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+  
+#close {
+    margin-left: 190px;
+}
+
+#submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

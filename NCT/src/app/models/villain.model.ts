@@ -7,4 +7,5 @@ export interface Villain {
     time: string;
     status: string;
     info: string;
+    image: string;
 }

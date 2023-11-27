@@ -1,12 +1,10 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { LocationsService } from '../../services/locations.service';
 import { VillainLocation } from '../../models/location.model';
 import { MapService } from '../../services/map.service';
 import { MarkersService } from '../../services/markers.service';
 import { MarkerInfo } from '../../models/marker.model';
-import { LatLng, Marker } from 'leaflet';
-import * as L from 'leaflet';
 
 @Component({
   selector: 'app-create-report',
@@ -20,9 +18,8 @@ export class CreateReportComponent implements OnInit {
   @Output() formClosed = new EventEmitter<void>();
 
   villainForm: FormGroup;
-  showForm:boolean = false;
   locationNames: string[] = [];
-  
+
   constructor(private fb: FormBuilder,
               private locationsService: LocationsService,
               private mapService: MapService,
@@ -32,9 +29,19 @@ export class CreateReportComponent implements OnInit {
       name: ['', Validators.required],
       reportee: ['', Validators.required],
       location: ['', Validators.required],
-      time: ['', Validators.required],
-      info: ['', Validators.required]
+      info: ['', Validators.required],
+      image: ['', this.validateImageUrl]
     });
+  }
+
+  validateImageUrl(control: FormControl): { [key: string]: any } | null {
+    const imageUrlRegex = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png|jpeg)/;
+
+    if (control.value && !imageUrlRegex.test(control.value)) {
+      return { invalidImageUrl: true };
+    }
+
+    return null;
   }
 
   ngOnInit(): void {
@@ -79,10 +86,6 @@ export class CreateReportComponent implements OnInit {
 
     this.locationsService.updateLocation(location);
 
-  }
-
-  closeForm(): void {
-    this.formClosed.emit();
   }
 
   updateLocationOptions(): void {

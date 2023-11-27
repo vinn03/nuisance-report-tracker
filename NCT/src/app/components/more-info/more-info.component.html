@@ -1,5 +1,6 @@
 <div *ngIf="selectedVillain">
     <table>
+        <img src={{selectedVillain.image}}>
         <tr>
             <th>Baddie's Name:</th>
             <td>{{selectedVillain.name}}</td>
@@ -18,8 +19,7 @@
         </tr>
         <tr>
             <th>Status:</th>
-            <td>{{selectedVillain.status}}</td>
-            <button (click)="changeStatus()">CHANGE</button>
+            <td>{{selectedVillain.status}} <button id="change" (click)="changeStatus()">CHANGE</button> </td>
         </tr>
         <tr>
             <th>Extra Info:</th>
