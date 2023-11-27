@@ -21,7 +21,6 @@
         <select formControlName="location" required> 
             <option *ngFor="let location of locationNames" [value]="location">{{location}}</option>
         </select>
-        <button type="button" (click)="updateOptions()">Fetch Location List (required)</button>
 
     <br>
 

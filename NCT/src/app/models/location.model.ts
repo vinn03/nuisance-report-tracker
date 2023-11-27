@@ -1,4 +1,6 @@
 export interface VillainLocation {
     name: string;
-    coordinates: string;
+    lat: number;
+    lng: number;
+    count: number;
 }

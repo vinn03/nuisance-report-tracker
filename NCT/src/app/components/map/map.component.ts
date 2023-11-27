@@ -1,6 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { MapService } from '../../services/map.service';
-import { MarkersService } from '../../services/markers.service';
+import { LocationsService } from '../../services/locations.service';
 import { Map, LatLng, tileLayer, Marker } from 'leaflet';
 import * as L from 'leaflet';
 
@@ -13,11 +13,11 @@ export class MapComponent implements AfterViewInit {
   
     private map!: Map;
     
-    constructor(private mapService: MapService,
-                private markersService: MarkersService) { }
+    constructor(private mapService: MapService, private locationsService: LocationsService ){}
 
     ngAfterViewInit(): void {
       this.initMap();
+      this.loadMarkers
     }
 
     private initMap(): void {
@@ -26,12 +26,21 @@ export class MapComponent implements AfterViewInit {
 
       this.mapService.setMap(this.map);
 
-      const tiles = tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       }).addTo(this.map);
       
-      this.mapService.initMarkers();
+    }
+
+    private loadMarkers(): void {
+      this.locationsService.getLocationsObservable().subscribe(locations => {
+        this.mapService.initMarkers();
+      });
+    }
+
+    reloadMarkers(): void {
+      this.mapService.reloadMarkers();
     }
 
 }

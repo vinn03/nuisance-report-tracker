@@ -57,11 +57,16 @@ export class AddLocationMapComponent implements AfterViewInit {
     }
 
     onSubmit(): void {
-      const coordinates:string = this.mapService.getMarkerCoordinates()!.replace(/[()]/g, '');
+      var coordinates:string | null = this.mapService.getMarkerCoordinates();
 
-      if (this.locationForm.valid && coordinates) {
+      if (this.locationForm.valid && (coordinates != null)) {
 
+        coordinates = coordinates.replace(/[()]/g, '');
+        const coordinatesArray:string[] = coordinates.split(', ');
+        const lat = parseFloat(coordinatesArray[0]);
+        const lng = parseFloat(coordinatesArray[1]);
         const name: string = this.locationForm.get('name')!.value.trim();
+
         const isNameExists:boolean = this.locationsService.getLocations().some(location => location.name === name);
 
         if (isNameExists) {
@@ -73,7 +78,9 @@ export class AddLocationMapComponent implements AfterViewInit {
 
         const newLocation: VillainLocation = {
           name: name,
-          coordinates: coordinates
+          lat: lat,
+          lng: lng,
+          count: 0
         };
 
         this.locationsService.addLocation(newLocation);
@@ -93,6 +100,7 @@ export class AddLocationMapComponent implements AfterViewInit {
       
       else {
         alert("Please select a location on the map.");
+        return;
       }
     }
 }

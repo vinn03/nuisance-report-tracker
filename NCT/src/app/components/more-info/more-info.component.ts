@@ -18,8 +18,11 @@ export class MoreInfoComponent {
   }
 
 
-  changeStatus(villain:Villain): void {
-    villain.status = 'RESOLVED';
-    console.log("Changed status of Baddie: " + villain.name);
+  changeStatus(): void {
+    const password = prompt("Enter password: ");
+    if (password === "BaggyJeans") {
+      this.selectedVillain.status = 'RESOLVED';
+      console.log("Changed status of Baddie: " + this.selectedVillain.name);
+    }
   }
 }

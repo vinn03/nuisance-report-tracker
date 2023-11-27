@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Map, LatLng, Marker } from 'leaflet'; // or whatever library you are using
+import { Map, Marker } from 'leaflet'; // or whatever library you are using
 import { BehaviorSubject } from 'rxjs';
-import { MarkersService } from './markers.service';
-import { MarkerInfo } from '../models/marker-info.model';
+import { LocationsService } from './locations.service';
+import { VillainLocation } from '../models/location.model';
 import * as L from 'leaflet';
 
 @Injectable({
@@ -11,8 +11,12 @@ import * as L from 'leaflet';
 export class MapService {
   private map!: Map;
   private markerCoordinatesSubject = new BehaviorSubject<string | null>(null);
+  private locations: VillainLocation[] = [];
+  private markers: Marker[] = [];
 
-  constructor(private markersService: MarkersService) { }
+  constructor(private locationsService: LocationsService) {
+    this.locations = this.locationsService.getLocations();
+  }
 
   setMap(map: Map) {
     this.map = map;
@@ -22,22 +26,29 @@ export class MapService {
     return this.map;
   }
 
-  placeMarker(marker: Marker, locationName: string, count: number): void {
-    if (this.map) {
-      marker.addTo(this.map);
-      marker.bindPopup(`<b>${locationName}</b><br>${count} nuisance(s) reported`);
-    }
+  placeMarker(lat: number, lng: number, name: string, count: number): Marker {
+    const newMarker:Marker = L.marker([lat, lng]);
+    newMarker.addTo(this.map).bindPopup(`<b>${name}</b><br>${count} nuisance(s) reported`);
+    return newMarker;
   }
 
   initMarkers(): void {
-    const markers: MarkerInfo[] = this.markersService.getMarkers();
-    markers.forEach((marker) => {
-      const markerObj: Marker = marker.marker;
-      const latLng: LatLng = markerObj.getLatLng();
-      L.marker(latLng).addTo(this.map).bindPopup(`<b>${marker.markerName}</b><br>${marker.markerCount} nuisance(s) reported`);;
+    console.log("Initializing markers: ", this.locations);
+    this.locations.forEach(location => {
+      if (location.count > 0) {
+       const marker:Marker = L.marker([location.lat, location.lng]).addTo(this.map).bindPopup(`<b>${location.name}</b><br>${location.count} nuisance(s) reported`);
+        this.markers.push(marker);
+      }
     });
   }
 
+  reloadMarkers(): void {
+    this.markers.forEach(marker => {
+      this.map.removeLayer(marker);
+    });
+    this.markers = [];
+    this.initMarkers();
+  }
 
   get markerCoordinates$() {
     return this.markerCoordinatesSubject.asObservable();

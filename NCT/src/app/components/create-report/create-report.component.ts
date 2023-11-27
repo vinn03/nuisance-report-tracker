@@ -1,10 +1,10 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LocationsService } from '../../services/locations.service';
 import { VillainLocation } from '../../models/location.model';
 import { MapService } from '../../services/map.service';
 import { MarkersService } from '../../services/markers.service';
-import { MarkerInfo } from '../../models/marker-info.model';
+import { MarkerInfo } from '../../models/marker.model';
 import { LatLng, Marker } from 'leaflet';
 import * as L from 'leaflet';
 
@@ -14,7 +14,7 @@ import * as L from 'leaflet';
   styleUrl: './create-report.component.css'
 })
 
-export class CreateReportComponent {
+export class CreateReportComponent implements OnInit {
 
   @Output() villainAdded = new EventEmitter<any>();
   @Output() formClosed = new EventEmitter<void>();
@@ -37,6 +37,10 @@ export class CreateReportComponent {
     });
   }
 
+  ngOnInit(): void {
+    this.updateLocationOptions();
+  }
+
   onSubmit(): void {
     if (this.villainForm.valid) {
 
@@ -52,29 +56,28 @@ export class CreateReportComponent {
   updateMap(locationName: string): void {
     const locations: VillainLocation[] = this.locationsService.getLocations();
     const location: VillainLocation = locations.find((location) => location.name === locationName)!;
-
     const markers: MarkerInfo[] = this.markersService.getMarkers();
-    const existingMarker: MarkerInfo | undefined= markers.find((marker) => marker.markerName === locationName);
 
-    if (existingMarker) { // update report count of existing marker
-    
-      const markerObject: MarkerInfo = markers.find((marker) => marker.markerName === locationName)!;
-      const marker: Marker = markerObject.marker;
-      this.markersService.addMarkerToService(marker, locationName);
-      this.mapService.removeMarker(marker);
-      this.mapService.placeMarker(marker, locationName, markerObject.markerCount);
+    if (location.count > 0) { // update report count of existing marker
+      location.count++;
+      console.log(markers);
+      console.log(location.name);
+      this.mapService.reloadMarkers();
+      // const marker: Marker = markers.find((marker) => marker.markerName === location.name)!.marker;
+      // this.mapService.removeMarker(marker);
+      // this.mapService.placeMarker(location.lat, location.lng, location.name, location.count);
+      console.log("Count is now: ", location.count);
+      
     } 
 
     else { // add new marker to map and markers service
-
-      const coordinates: string[] = location.coordinates.split(' ');
-      const latLng: LatLng = new L.LatLng(parseFloat(coordinates[0]), parseFloat(coordinates[1]));
-      const marker = new Marker(latLng);
-      this.markersService.addMarkerToService(marker, locationName);
-
-      const markerCount: number = this.markersService.getCount(locationName);
-      this.mapService.placeMarker(marker, locationName, markerCount);
+      location.count++;
+      const newMarker = this.mapService.placeMarker(location.lat, location.lng, location.name, location.count);
+      this.markersService.addMarker(newMarker, location.name);
+      console.log("Count is now: ", location.count);
     }
+
+    this.locationsService.updateLocation(location);
 
   }
 
@@ -82,8 +85,7 @@ export class CreateReportComponent {
     this.formClosed.emit();
   }
 
-  updateOptions(): void {
-    // Assuming you have a LocationsService injected and available
+  updateLocationOptions(): void {
     const updatedLocations = this.locationsService.getLocations();
 
     if (updatedLocations.length > 0) {
