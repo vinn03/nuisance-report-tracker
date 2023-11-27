@@ -3,6 +3,10 @@ import { VillainService } from '../../services/villain.service';
 import { Villain } from '../../models/villain.model';
 import { LocationsService } from '../../services/locations.service';
 import { MapService } from '../../services/map.service';
+import { HttpClient } from '@angular/common/http';
+import { of } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-data-table',
@@ -16,9 +20,10 @@ export class DataTableComponent {
     showForm:boolean = false;
     sortColumn: string = '';
     sortDirection: string = 'None';
-    createButtonText: string = "CREATE NUISANCE REPORT"
+    createButtonText: string = "CREATE NUISANCE REPORT";
 
-    constructor(private villainService: VillainService, private locationsService: LocationsService, private mapService: MapService) { 
+    constructor(private villainService: VillainService, private locationsService: LocationsService, 
+      private http: HttpClient, private storageService: StorageService) { 
       this.villains = villainService.getVillains();
     }
 
@@ -73,10 +78,43 @@ export class DataTableComponent {
     }
     
     deleteVillain(villain:Villain): void {
-      this.villainService.deleteVillain(villain);
-      this.locationsService.decreaseCount(villain.location);
-      location.reload();
-      console.log("Location count: ", this.locationsService.getLocationCount(villain.location));
+
+      var password:string | null = prompt("Enter password: ");
+
+      if (password === '' || password === null) {
+        alert("Please enter a password!");
+        return;
+      }
+
+      this.http.get<Object>(`https://api.hashify.net/hash/MD5/hex?value=${password}`).pipe(
+        tap((hash: any) => {
+          const hashString = JSON.stringify(hash);
+          const digestStartIndex = hashString.indexOf("Digest:") + 12;
+          const digestEndIndex = hashString.indexOf("\"", digestStartIndex);
+          const digest = hashString.substring(digestStartIndex, digestEndIndex);
+
+          if (digest === 'fcab0453879a2b2281bc5073e3f5fe54') {
+            this.locationsService.decreaseCount(villain.location);
+            this.villainService.deleteVillain(villain);
+            location.reload();
+            console.log("Location count: ", this.locationsService.getLocationCount(villain.location));
+            this.storageService.saveVillainsToStorage(this.villainService.getVillains()).pipe(
+              tap(() => console.log("Saved villains to storage")),
+              catchError((error) => {
+                console.log("Error saving villains to storage: ", error);
+                return of(null);
+              })
+            ).subscribe();
+          }
+          else {
+            alert("Incorrect password!");
+          }
+        }),
+        catchError((error) => {
+          console.log("Error hashing password: ", error);
+          return of(null);
+        })
+      ).subscribe();
     }
 
     toggleForm(): void {

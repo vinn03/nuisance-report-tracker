@@ -5,6 +5,7 @@ import { VillainLocation } from '../../models/location.model';
 import { MapService } from '../../services/map.service';
 import { MarkersService } from '../../services/markers.service';
 import { MarkerInfo } from '../../models/marker.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-report',
@@ -23,7 +24,8 @@ export class CreateReportComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private locationsService: LocationsService,
               private mapService: MapService,
-              private markersService: MarkersService) {
+              private markersService: MarkersService,
+              private router: Router) {
 
     this.villainForm = this.fb.group({
       name: ['', Validators.required],
@@ -50,12 +52,11 @@ export class CreateReportComponent implements OnInit {
 
   onSubmit(): void {
     if (this.villainForm.valid) {
-
-      const locationName:string = this.villainForm.get('location')!.value;
+      const locationName: string = this.villainForm.get('location')!.value;
       this.updateMap(locationName);
-      
       this.villainAdded.emit(this.villainForm.value);
       this.villainForm.reset();
+      location.reload();
     }
   }
 
