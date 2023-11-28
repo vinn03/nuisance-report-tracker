@@ -4,7 +4,3 @@ Storage Server: https://272.selfip.net/accounts/YnXgblDzfC/manage/ySPsVwSB3MQ9RB
 
 make sure you zip NCT, not this root directory and upload to canvas
 
- 
-TO-DO:
-
-- Style page and make it look nice (lol)
