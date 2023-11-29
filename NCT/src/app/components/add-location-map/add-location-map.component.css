@@ -6,7 +6,6 @@
 }
 
 button {
-    margin-top: 20px;
     margin-bottom: 5px;
     border: 1px solid dodgerblue;
     color: dodgerblue;
@@ -18,7 +17,7 @@ button {
 }
 
 input {
-    margin-top: 20px;
+    margin-top: 5px;
     margin-bottom: 5px;
     border: 1px solid black;
     background-color: white;
@@ -36,4 +35,9 @@ input {
 #submit:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+}
+
+#mapheader {
+    margin-top: 20px;
+    margin-bottom: 5px;
 }
