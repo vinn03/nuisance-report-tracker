@@ -13,6 +13,7 @@ body {
     border-radius: 30px;
     box-shadow: 0px 0px 20px rgb(84, 128, 145);
     padding-right: 30px;
+    font-family: "Audiowide", sans-serif;
 }
 
 @media (max-width: 950px) {

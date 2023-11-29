@@ -15,8 +15,8 @@ export class VillainService {
     this.storageService.loadVillainsFromStorage().pipe(
       tap((storedVillains) => {
         if (storedVillains) {
-          storedVillains.data.forEach((item: any) => {
-            this.villains.push(item);
+          storedVillains.data.forEach((villain: Villain) => {
+            this.villains.push(villain);
           });
           console.log("Loaded villains from storage: ", this.villains);
           console.log(typeof(this.villains))

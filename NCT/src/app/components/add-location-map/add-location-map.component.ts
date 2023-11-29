@@ -84,15 +84,6 @@ export class AddLocationMapComponent implements AfterViewInit {
         };
 
         this.locationsService.addLocation(newLocation);
-        console.log("Added location: " + name + " at " + coordinates);
-
-        const locations = this.locationsService.getLocations();
-
-        // debugging locations
-        console.log("Locations in list: ")
-        locations.forEach((location) => {
-          console.log("Location: ", location);
-        });
 
         this.locationForm.reset();
         this.router.navigate(['/map']);
