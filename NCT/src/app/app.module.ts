@@ -12,9 +12,7 @@ import { MapService } from './services/map.service';
 import { VillainService } from './services/villain.service';
 import { AddLocationMapComponent } from './components/add-location-map/add-location-map.component';
 import { MoreInfoComponent } from './components/more-info/more-info.component';
-import { MarkersService } from './services/markers.service';
 import { LocationsService } from './services/locations.service';
-import { DeleteComponent } from './components/delete/delete.component';
 
 
 @NgModule({
@@ -24,8 +22,7 @@ import { DeleteComponent } from './components/delete/delete.component';
     CreateReportComponent,
     MapComponent,
     AddLocationMapComponent,
-    MoreInfoComponent,
-    DeleteComponent
+    MoreInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +31,7 @@ import { DeleteComponent } from './components/delete/delete.component';
     RoutingModule,
     HttpClientModule
   ],
-  providers: [MapService, VillainService, MarkersService, LocationsService],
+  providers: [MapService, VillainService, LocationsService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

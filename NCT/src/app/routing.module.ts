@@ -6,7 +6,6 @@ import { DataTableComponent } from './components/data-table/data-table.component
 import { CreateReportComponent } from './components/create-report/create-report.component';
 import { MoreInfoComponent } from './components/more-info/more-info.component';
 import { AddLocationMapComponent } from './components/add-location-map/add-location-map.component';
-import { DeleteComponent } from './components/delete/delete.component';
 
 const appRoutes: Routes = [
     { path: 'map', component: MapComponent },
@@ -14,7 +13,6 @@ const appRoutes: Routes = [
     { path: 'create-report', component: CreateReportComponent },
     { path: 'more-info', component: MoreInfoComponent },
     { path: 'add-location-map', component: AddLocationMapComponent },
-    { path: 'delete', component: DeleteComponent},
     { path: '', redirectTo: '/map', pathMatch: 'full' }
 ];
 
