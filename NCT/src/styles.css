@@ -1,18 +1,27 @@
 html {
-    width: 1000px;
-    margin: auto;
-    background-color: skyblue;
-    padding-top: 10px;
-    padding-bottom: 30px;
+    
+    background-image: url("./669.jpg");
+    background-size: 100%;
+    background-position:unset;
+    background-repeat:space;
+    
 }
     
 body {
-    background-color: white;
+    width: 1000px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 30px;
+
+    background-color: rgb(237, 245, 255);
+
     padding: 20px;
+    padding-right: 30px;
     padding-left: 30px;
+
     border-radius: 30px;
     box-shadow: 0px 0px 20px rgb(84, 128, 145);
-    padding-right: 30px;
+
     font-family: "Audiowide", sans-serif;
 }
 
