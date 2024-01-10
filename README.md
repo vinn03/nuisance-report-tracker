@@ -13,7 +13,7 @@ Users can:
   - Add and store a list of locations, by navigating to a page, via the "ADD LOCATION" navigation button, where you add a new location by placing a marker on the given map and giving it a name.
   - Create a new instance of a nuisance as a report, by clicking "CREATE NUISANCE REPORT" and filling out the necessary details in the revealed form.
     - Reports will have an associated status, which can be represented as either "OPEN" or "RESOLVED".
-  - Sort the reports in the table, below the map, by clicking on a table header to sort in either ascending or descending with respect to the header's column contents.
+  - Sort the reports in the table, below the map, by clicking on a table header to sort the header's contents in either ascending or descending order.
   - View the number of nuisances reported at a given location, by clicking on an existing marker to reveal the count.
   - View extra information of a report, by clicking the "MORE INFO" button associated with the report.
   - Manage your existing reports, either by changing a report's status to "RESOLVED" or by eliminating it from the table via the "DELETE" button.
