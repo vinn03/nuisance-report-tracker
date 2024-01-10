@@ -4,7 +4,7 @@ An Angular web application developed as a final project for the "Client-side Dev
 
 ## What is this application?
 
-This application allows users to report any nuisances they experience on an interactive map! Users will be able to add and store the locations of these occurrences,
+This application allows users to report any nuisances they encounter on an interactive map! Users will be able to add and store the locations of these occurrences,
 which then can be used to create new reports, representing the instances of these nuisances. The reports will then be displayed on the map as a marker, and in the table below the map.
 
 ## Application features
