@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Villain } from '../models/villain.model';
 import { VillainLocation } from '../models/location.model';
+import { key } from '../../../key.json';
 
 @Injectable({
     providedIn:'root'
 })
 
-export class StorageService {
-    private apiURL = "https://272.selfip.net/apps/YnXgblDzfC/collections/nct_data/documents/";
+export class StorageService {   
+    private apiURL = key;
 
     constructor(private http: HttpClient) { }
 
