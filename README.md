@@ -24,4 +24,4 @@ Users can:
   - Angular, the application framework, which utilizes HTML, CSS, and Typescript to construct the application.
   - Leaflet, the API handling the display and interaction of the embedded map.
   - OpenStreetMaps, the base map used for displaying reports and for the creation of location instances.
-  - A NoSQL database utilizing REST API functions to handle storage and retrieval of user reports and locations.
+  - A NoSQL database utilizing REST API HTTP methods to handle storage and retrieval of user reports and locations.
